@@ -1,0 +1,246 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Roboto:wght@300&display=swap" rel="stylesheet">
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Roboto:ital,wght@0,300;1,100&display=swap" rel="stylesheet">
+    <title>TP -Exercice Card [DevWeb PARIS Bénédicte]</title>
+    <style> 
+     
+      .container{ 
+        position:absolute;
+        width: 380px; /* je redimensionne mon container sur la largeur*/
+        height: 560px; /* je redimensionne mon container sur la hauteur*/
+        border: 2px solid black;/* crée les bordures*/
+        border-radius: 30px; /* on arrondi les bords de la card*/
+        right: 500px;/*sert à centrer la card sur la fenêtre à 500px (en position absolute)*/
+        top: 100px; /*sert à ajuster/centrer la card sur la hauteur de la fenêtre à 100px depuis le haut (en position absolute)*/
+        /*overflow: hidden; /* sert à masquer les éléments qui dépassent*/
+        box-shadow: 15px 20px 12px rgba(0,0,0,.4);/*on va créer une ombre sur les bords du conteneur pour donner une 
+        impression de profondeur*/
+        background-color: blanchedalmond;
+        padding-bottom: 30px; /*je défini l'espace entre la bordure du bas et la bordure du bas des autres div class pastille*/
+      }
+
+      img{
+        
+        width: 380px; /* je redimensionne l'image à la même taille que mon conteneur*/
+        height: 280px;
+        border-radius: 30px; /*on doit arrondir les bords de l'image pour qu'ils ne depassent pas de la card*/
+      }
+
+      .t-shirt{
+       
+        width: 380px;/* je redimensionne mon container image à 50% de mon container*/
+        height: 280px;
+        
+      }
+
+      .button{
+        /* je mets le button avec une profondeur moins importante que le container général*/
+        position: absolute;
+        z-index: 1;
+        background-color: white;
+        border:1px solid grey;
+        width: 100px;
+        padding: 15px;
+        top: 150px; /*sert à ajuster/centrer le bouton "view details" dans la hauteur de la div (en position absolute) 
+        aprés avoir placé l'overlay la position a du être corrigé en négative pour revenir centré
+        */
+        left: 120px; /*sert à ajuster/ centrer le boutton "view details" dans la largeur de la carte (en position absolute)*/
+        cursor: pointer; /* fait apparaitre un pointer dans l'intégralité de la div et pas uniquement sur le lien*/
+        background-color: rgba(255, 255, 255, 0.8);
+        
+      }
+
+      a {
+        color:#4ad0ae;
+        text-decoration: none;
+        text-align: center;
+      }
+
+
+      /*quand je veux mettre l'overlay le button disparait comment faire  ?*/
+      .color1-overlay{
+        position: absolute;  /* je place la position en absolute pour qu'il soit au même niveau que l'image
+        je dois recentrer le bouton en négatif*/
+        transition: 1s ease; /* je défini la transition du voile*/
+        background: rgba(74, 208, 174, 0.5); /* couleur*/
+        opacity:0; /* en position normal sans passage de la souris, je mets l'opacité à 0*/
+        width: 100%;/*définit la taille a 100% du conteneur car on est en position absolute*/
+        height: 100%;/* définit la hauteur à 100% du conteneur car on est en position*/
+        top: 0; 
+        left: 0;
+        border-radius: 5%;
+        
+      }
+
+      .button:hover {/* sans survol de la souris mon overlay ne se fait pas et mon button n'apparait pas je ne comprends pas pourquoi*/
+          background-color: #4ad0ae;
+          color: white;
+        }
+
+
+      .color1-overlay:hover {
+        opacity: 0.6;
+      }
+
+      .zoom:hover {
+        transform:scale(1.1); /*ne fonctionne plus une fois l'overlay en place ? crée un effet de zoom sur l'image au survol de la souris*/
+      }
+
+      .zoom {
+        transition: 0.4s; /*(concerne le zoom mais ne fonctionne plus avec l'overlay) on ajoute un effet de transition à notre zoom au survol de l'image pour que la transition soit moins brusque*/
+      }
+
+      h2 p{
+        font-family: Roboto, sans-serif; /*on applique la font importer par le lien <link> depuis google font (cf link en balise head)*/
+      }
+
+      .card-title{
+        margin: 25px;/*on applique des marge pour espacer le conteneur card-title du conteneur "container" */
+      }
+
+      .card-size{
+        margin: 25px; /* on applique des marges pour espacer le conteneur card-size du conteneur "container"*/
+      }
+
+      .card-color{
+        margin:25px; /* on applique des marges pour espacer le conteneur card-color du conteneur "container*/
+      }
+
+      p{
+        color:#9d9da1;/*on applique la couleur indiqué sur les paragraphes*/
+        font-size: 20px;
+      }
+
+      body{
+        background-color: rgba(16, 139, 139, 0.286);/*permet de faire ressortir la card a enlever quand tout sera appliqué*/
+      }
+
+      .pastille1{ /* je crée les pastilles*/
+        background-color:#6e8dd6; /* j'affecte les couleurs*/
+        border: 2px solid #6e8dd6; /*je crée les bordures*/
+        border-radius: 100%; /* j'arrondis les bords de la pastilles en totalité (100%) ou en degrés(360°)*/
+        width: 15px; /*je donne une taille en pixels*/
+        height: 15px; /* je donne une hauteur en pixels*/
+        display: inline-block;
+        flex-direction: row-reverse;
+      }
+
+      .pastille2{
+        background-color: #f46060;
+        border: 2px solid #f46060;
+        border-radius: 100%;
+        width: 15px;
+        height: 15px;
+        display: inline-block;
+        flex-direction: row-reverse;
+
+      }
+
+      .pastille3{
+        background-color: #ffffff;
+        border: 2px solid #ffffff;
+        border-radius: 100%;
+        width: 15px;
+        height: 15px;
+        display: inline-block;
+        flex-direction: row-reverse;
+  
+      }
+
+      .pastille4{
+        background-color: #45c28d;
+        border: 2px solid #45c28d;
+        border-radius: 100%;
+        width: 15px;
+        height: 15px;
+        display: inline-block;
+        flex-direction: row-reverse;
+        
+      }
+
+
+      /*je peux regrouper le css des pastilles de la manières suivantes
+      
+      .pastille1 .pastille2 .pastille3 .pastille4 {
+        background-color: #6e8dd6, #f46060, #ffffff, #45c28d;
+        border: 2px solid #6e8dd6, 2px solid #f46060, 2px solid #ffffff, 2px solid #45c28d;
+        border-radius: 100%;
+        width: 15px;
+        height: 15px;
+        display: inline-block;
+        flex-direction:row-reverse
+      }*/
+      
+        </style>
+</head>
+<body>
+    <!--<h1>Reproduisez cet exemple de "card"</h1>
+    Utilisez vos connaissances en CSS/HTML pour reproduire cet exemple :
+      La carte fait 380pxx560px
+      l'image est téléchargeable ici https://raw.githubusercontent.com/washaweb/MNS-DEVWEB-2023/main/Cours/Ressources/07-1-exercice-css/exo-11-img.webp
+      - La Font utilisée et une Roboto (Google font)
+      - Couleurs du texte: #3a3d47 (noir), #4ad0ae (vert du bouton), #9d9da1 (gris)
+      - Couleur de survol de l'image : #4ad0ae avec une transparence de 0.6
+      - Les couleurs des pastilles sont : #6e8dd6, #f46060, #ffffff, #45c28d
+    
+    
+    <img width="480" src="../../Cours/ressources/07-1-exercice-css/exo-11-exercice-card.png" alt="Exemple à reproduire en HTML/CSS">-->
+
+      <div class="container"><!-- cette div est la div qui va servir de container à l'intégralité de la card-->
+
+      <!--on va définir une div qui contiendra l'image qui se trouvera sur le haut de la card-->
+        <div class="t-shirt"> <!--on associe la class "t-shirt", pour bien comprendre ce que l'on va cibler-->
+
+            <img class="zoom" src=".img/exo-11-img.webp" alt="maillot de football vert">
+
+              <div class="color1-overlay"> <!--sert à placer la couleur de fond qui se trouve entre l'image et le bouton-->
+
+                  <div class="button"> <!--on met une class "button" pour pouvoir cibler -->
+                    <a href="https://www.google.com/"> View Details</a> <!--on met un lien factice pour l'essai-->
+                  </div>
+
+              </div>
+
+        </div>
+
+        <!--on crée une autre div qui sera la seconde partie de la card, la partie blanche avec les différentes partie-->
+
+        <div class="card-body"> <!--la class "card-body" me permet de situer l'ensemble de la seconde partie-->
+
+            <div class="card-title"> <!--la class "card-title" va permettre de cibler le titre "Addidas" de la seconde partie de la card-->
+                <h2>Adidas Originals</h2>
+                <p>Men's running shirt</p>
+            </div>
+
+            <div class="card-size"> <!-- la class "card-size" va permettre de cibler le second container et de comprendre ce qui se trouve dans ce second container-->
+                <h2>SIZES</h2>
+                <p> XS, S, M, L, XXL</p>
+            </div>
+
+            <div class="card-color"><!--- la class "card-color" va permettre de cibler le troisième et dernier container et de savoir que l'on cibler les logos couleurs-->
+                <h2>Colors</h2>
+
+                    <div class="flex">
+                      <div class="pastille1"></div>
+                      <div class="pastille2"></div>
+                      <div class="pastille3"></div>
+                      <div class="pastille4"></div>
+                  </div>
+
+                </h2>
+            </div>
+
+        </div>
+
+      </div>
+
+</body>
+</html> <!-- j'ai eu du mal à faire l'overlay comme je le voulais c'est à dire en montant du bas ver le haut et uniquement dans le cadre de la photo du maillot bleu-->
